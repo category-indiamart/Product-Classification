@@ -1,0 +1,42 @@
+**K-Fold validation:- It provides a robust estimate of the performance of a model on unseen data. It does this by splitting the training dataset into k subsets and takes turns training models on all subsets except one which is held out, and evaluating model performance on the held out validation dataset. The process is repeated until all subsets are given an opportunity to be the held out validation set. The performance measure is then averaged across all models that are created.
+
+Developing model in Cygwin with k-fold:-
+Create a list in vi editors with contains numeric values from 1 to 10. 
+Use command: vi file and insert values. We can also create a file list containing different file names so that we can train the entire set of data in one go.
+To create a list as per our choice use below command:
+                    find /cygdrive/c/Users/Ashutosh/Desktop/corpusrar/ -name \*.txt -printf "%f\n" > list
+
+
+Train the model using following command: 
+while read p; do fasttext/fasttext.exe supervised -input /cygdrive/e/KFold/Wheel\ Loader/Training\ Files_brand/$p.txt -output /cygdrive/e/KFold/Wheel\ Loader/Training\ Files_brand/bin/$p -lr 0.8 -minn 4 -epoch 25 -wordNgrams 1 -lrUpdateRate 100 -thread 4 -loss hs; done < file
+
+Testing command to get output data:
+while read p ; do fastText/fasttext.exe predict-prob /cygdrive/e/KFold/Wheel\ Loader/Training\ Files_brand/bin/$p.bin /cygdrive/e/KFold/Wheel\ Loader/Testing_pmcat/$p.txt 2 > /cygdrive/e/KFold/Wheel\ Loader/out_brand/$p.out ;done < file 
+
+After getting output data, we combine the output result(.out) file and testing data-set to get final output. Use following commands to get final output(combined data).
+while read p ; do paste /cygdrive/e/KFold/Wheel\ Loader/Testing_pmcat/$p.txt /cygdrive/e/KFold/Wheel\ Loader/out_brand/$p.out |column -s $'\t' -t > /cygdrive/e/KFold/Wheel\ Loader/out_brand/$p.final ; done < file
+
+The combined data is a (.final) file. To convert (.final) files to (.csv)--> Open command prompt and run “ren *.final *.csv” in the final files directory.
+
+
+
+## Some more commands##
+
+
+1.To clean the file: txt files containint id_1.txt,id_2.txt need to be cleaned
+
+$ find /cygdrive/c/Users/Imart/Desktop/Submersible/txtfile/*.txt -type f -exec sed -i 's/\r//g' {} \; 
+
+2.Make a list:
+
+$ find /cygdrive/c/Users/Imart/Desktop/Submersible/training/ -name \*.txt -printf "%f\n" > /cygdrive/c/Users/Imart/Desktop/Submersible/list3
+
+3.train the model:
+
+$ while read p; do fasttext/fasttext.exe supervised -input /cygdrive/c/Users/Imart/Desktop/Submersible/training/$p -output  /cygdrive/c/Users/Imart/Desktop/Submersible/output/$p -lr 0.1 -minn 3 -epoch 25 -wordNgrams 2 -bucket 1000000; done <  /cygdrive/c/Users/Imart/Desktop/Submersible/list3
+
+
+4.testing(prdict prob):
+
+$ while read q; do while read p; do cat /cygdrive/c/Users/Imart/Desktop/PUMPS/PUMPNEW/testing/$q/$p ; fasttext/fasttext.exe predict-prob /cygdrive/e/pumpoutput/$q.txt.bin /cygdrive/c/Users/Imart/Desktop/PUMPS/PUMPNEW/testing/$q/$p 2 ; done < /cygdrive/c/Users/Imart/Desktop/PUMPS/PUMPNEW/txtlist/$q.txt > /cygdrive/c/Users/Imart/Desktop/PUMPS/PUMPNEW/output/$q.out ; done <  /cygdrive/c/Users/Imart/Desktop/PUMPS/PUMPNEW/listpumps
+  
