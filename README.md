@@ -96,7 +96,8 @@ The combined data is a (.final) file. To convert (.final) files to (.csv)--> Ope
 We have created another r-script which will convert all the output files into readable format in one go.  
 Use following [R-script](https://docs.google.com/document/d/1qNoWZFzQIGHnFQ4voRTvRODQR8ELbA0mp5SjzLcZKFA/edit?usp=sharing) to get output data in readable format.
 This script will create K output files(.csv) or (.xlsx) for K different folds , which can be directly used for further analysis.
-Processing output files at child level.
+
+Processing output files at [child level](https://docs.google.com/document/d/1vKZK1ZYMZOaLKOysxo5Y_hv8EMujW1n36Lf68faS2ZU/edit?usp=sharing).
 
 
 ## Same Procedure to be followed for BL classification without using K-fold cross validation:
