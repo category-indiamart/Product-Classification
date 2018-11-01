@@ -97,7 +97,7 @@ while read p ; do paste /cygdrive/e/KFold/Wheel\ Loader/Testing_pmcat/$p.txt /cy
 
 The combined data is a (.final) file. To convert (.final) files to (.csv)--> Open command prompt and run ``` “ren *.final *.csv” ``` in the final files directory.
 
-##### Processing combined output file in R to get output in readable format.
+#### Processing combined output file in R to get output in readable format.
 We have created another r-script which will convert all the output files into readable format in one go.  
 Use following [R-script](https://docs.google.com/document/d/1qNoWZFzQIGHnFQ4voRTvRODQR8ELbA0mp5SjzLcZKFA/edit?usp=sharing) to get output data in readable format.
 This script will create K output files(.csv) or (.xlsx) for K different folds , which can be directly used for further analysis.
@@ -105,7 +105,7 @@ This script will create K output files(.csv) or (.xlsx) for K different folds , 
 Processing output files at [child level](https://docs.google.com/document/d/1vKZK1ZYMZOaLKOysxo5Y_hv8EMujW1n36Lf68faS2ZU/edit?usp=sharing).
 
 
-## Same Procedure to be followed for BL classification without using K-fold cross validation:
+#### Same Procedure to be followed for BL classification without using K-fold cross validation:
 
 #### We will train the model on :
 > Entire PMCAT products data
@@ -116,7 +116,7 @@ Processing output files at [child level](https://docs.google.com/document/d/1vKZ
 #### Same command to be used w/o kfold.
 
 
-##### Making the model better -hyper-parameter tuning:
+#### Making the model better -hyper-parameter tuning:
 
 Getting to the right mix for your trainig parameters requires a lot of experimentation but fruits of labour will be sweet. The code below is one which will automatically train and test your model on a given set of paramters , will comapre the results with the supposed output and help to choose the most suited one . Please note choice and variation of parameters is a personal choice and depends much upon your problem statement .
 ```
