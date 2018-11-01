@@ -1,8 +1,20 @@
 # Product-Classification
 
-Framing the Business Problem :
+#### Framing the Business Problem :
 
-One of the important steps in Machine Learning is getting your problem statement correct.  This will help
+One of the important steps in Machine Learning is getting your problem statement correct.  This will help you get the right algorithm to solve your problem or even build a new one. 
+
+#### My Problem Statement 
+
+We had to map various products to their most appropriate available category . eg long grain 2 year aged rice should be mapped to "basmati rice" while long grain ,aged india gate rice should be claasified as "India Gate Basmati rice". 
+To map products in most relevant category, we considered the following parameters(textual inputs):
+> Product Name(PC_ITEM_NAME),
+> It's Specification like long grain , aged for 2 years , brand etc
+> Product description(only relevant information).
+
+#### Choice of Tools 
+
+We narrowed on [fasttext](https://fasttext.cc/docs/en/supervised-tutorial.html) based classifier and used R for processing our data. Our CLI here was cygwin but this is a personal choice, you just need to know some basic shell commands.
 
 #### Links to download required tools
 
@@ -11,13 +23,6 @@ One of the important steps in Machine Learning is getting your problem statement
 [Install R Studio](https://www.rstudio.com/products/rstudio/download/)
 
 [Install Cygwin](http://www.cygwin.com/install.html)
-
-
-#### Objective:
-To map products in most relevant mcat(brand, non brand or PMCAT), based on following parameters(textual inputs):
-> Product Name(PC_ITEM_NAME),
-> Specification response,
-> Product description(only bulleted descriptions).
 
 #### Defining the SubCAT at 3 levels of taxonomy. 
 ```
@@ -111,7 +116,9 @@ Processing output files at [child level](https://docs.google.com/document/d/1vKZ
 #### Same command to be used w/o kfold.
 
 
-##### Training model by auto hyper-parameter tuning:
+##### Making the model better -hyper-parameter tuning:
+
+Getting to the right mix for your trainig parameters requires a lot of experimentation but fruits of labour will be sweet. The code below is one which will automatically train and test your model on a given set of paramters , will comapre the results with the supposed output and help to choose the most suited one . Please note choice and variation of parameters is a personal choice and depends much upon your problem statement .
 ```
 $ while read p; do while read q; do fastText/fasttext.exe supervised -input /cygdrive/e/Yarn_new/Yarn_NPS/Child/Training\ Files/$q.txt -output /cygdrive/e/Yarn_new/Yarn_NPS/Child/bin/$p.$q -lr 0.8 -minn 4 -epoch 25 -wordNgrams 1 -lrUpdateRate 100 -thread 4 -loss hs; done < /cygdrive/e/Yarn_new/Yarn_NPS/nps_yarn_list ; done < lr_range ;
 ```
