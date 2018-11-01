@@ -119,6 +119,19 @@ Processing output files at [child level](https://docs.google.com/document/d/1vKZ
 #### Making the model better -hyper-parameter tuning:
 
 Getting to the right mix for your trainig parameters requires a lot of experimentation but fruits of labour will be sweet. The code below is one which will automatically train and test your model on a given set of paramters , will comapre the results with the supposed output and help to choose the most suited one . Please note choice and variation of parameters is a personal choice and depends much upon your problem statement .
+
+#### Training Model based on hyper-parameter tuning:
 ```
 $ while read p; do while read q; do fastText/fasttext.exe supervised -input /cygdrive/e/Yarn_new/Yarn_NPS/Child/Training\ Files/$q.txt -output /cygdrive/e/Yarn_new/Yarn_NPS/Child/bin/$p.$q -lr 0.8 -minn 4 -epoch 25 -wordNgrams 1 -lrUpdateRate 100 -thread 4 -loss hs; done < /cygdrive/e/Yarn_new/Yarn_NPS/nps_yarn_list ; done < lr_range ;
 ```
+
+#### Testing Model based on hyper-parameter tuning:
+
+```
+while read p; do fastText/fasttext.exe predict-prob /cygdrive/e/Product\ Classification_new/NPS/Child1/Excavator\ Tuned/Tuned_epoch/$p.bin /cygdrive/e/Product\ Classification_new/NPS/Child/excavator-validation.txt 2 > /cygdrive/e/Product\ Classification_new/NPS/Child1/Tuned_epoch_out/$p.out; done < epoch2
+ ```
+#### getting final output(.final) based on hyper-parameter tuning:
+```
+ while read p; do paste /cygdrive/e/Product\ Classification_new/NPS/Child/excavator-validation.txt /cygdrive/e/Product\ Classification_new/NPS/Child1/Tuned_Ngram_out/$p.out | column -s $'\t' -t > /cygdrive/e/Product\ Classification_new/NPS/Child1/Tuned_Ngram_out/final/$p.final; done < WNgram
+ ```
+
